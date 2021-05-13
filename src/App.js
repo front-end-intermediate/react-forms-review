@@ -1,9 +1,9 @@
-import React from "react";
-import Form from "./Form";
-import "./styles.css";
+import React from 'react'
+import Form from './Form'
+import './styles.css'
 
 function App() {
-  return <Form />;
+  return <Form />
 }
 
-export default App;
+export default App

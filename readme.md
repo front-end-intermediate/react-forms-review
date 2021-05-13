@@ -18,7 +18,7 @@ function ContactForm() {
       </div>
       <button type="submit">Submit</button>
     </form>
-  );
+  )
 }
 ```
 
@@ -37,15 +37,15 @@ Add 3 calls to useState to create 3 variables to hold the inputs’ values:
 
 ```js
 function App() {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [message, setMessage] = React.useState("");
+  const [name, setName] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [message, setMessage] = React.useState('')
 
   function handleSubmit(event) {
-    event.preventDefault();
-    console.log("name:", name);
-    console.log("email:", email);
-    console.log("message:", message);
+    event.preventDefault()
+    console.log('name:', name)
+    console.log('email:', email)
+    console.log('message:', message)
   }
 
   return (
@@ -78,7 +78,7 @@ function App() {
       </div>
       <button type="submit">Submit</button>
     </form>
-  );
+  )
 }
 ```
 
@@ -96,9 +96,9 @@ With every keypress, the component will re-render the whole form.
 
 ```js
 function App() {
-  const nameRef = React.useRef();
-  const emailRef = React.useRef();
-  const messageRef = React.useRef();
+  const nameRef = React.useRef()
+  const emailRef = React.useRef()
+  const messageRef = React.useRef()
 
   return (
     <form>
@@ -116,7 +116,7 @@ function App() {
       </div>
       <button type="submit">Submit</button>
     </form>
-  );
+  )
 }
 ```
 
@@ -132,15 +132,15 @@ When the component is first rendered, React will set up the refs. nameRef.curren
 
 ```js
 function ContactForm() {
-  const nameRef = React.useRef();
-  const emailRef = React.useRef();
-  const messageRef = React.useRef();
+  const nameRef = React.useRef()
+  const emailRef = React.useRef()
+  const messageRef = React.useRef()
 
   function handleSubmit(event) {
-    event.preventDefault();
-    console.log("name:", nameRef.current.value);
-    console.log("email:", emailRef.current.value);
-    console.log("message:", messageRef.current.value);
+    event.preventDefault()
+    console.log('name:', nameRef.current.value)
+    console.log('email:', emailRef.current.value)
+    console.log('message:', messageRef.current.value)
   }
 
   return (
@@ -159,7 +159,7 @@ function ContactForm() {
       </div>
       <button type="submit">Submit</button>
     </form>
-  );
+  )
 }
 ```
 
@@ -180,19 +180,19 @@ E.g.:
 
 ```js
 function EmailField() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('')
 
   const handleChange = (e) => {
     // no exclamations allowed!
-    setEmail(e.target.value.replace(/!/g, ""));
-  };
+    setEmail(e.target.value.replace(/!/g, ''))
+  }
 
   return (
     <div>
       <label htmlFor="email">Email address</label>
       <input id="email" value={email} onChange={handleChange} />
     </div>
-  );
+  )
 }
 ```
 
@@ -201,16 +201,16 @@ Because controlled inputs are more complex, we often combine inputs into a singl
 ```js
 function MultipleInputs() {
   const [values, setValues] = useState({
-    email: "",
-    name: "",
-  });
+    email: '',
+    name: '',
+  })
 
   const handleChange = (e) => {
     setValues((oldValues) => ({
       ...oldValues,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   return (
     <>
@@ -233,7 +233,7 @@ function MultipleInputs() {
         />
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -248,11 +248,11 @@ You can even go without refs:
 ```js
 function NoRefsForm() {
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    console.log("email", form.email, form.elements.email);
-    console.log("name", form.name, form.elements.name);
-  };
+    e.preventDefault()
+    const form = e.target
+    console.log('email', form.email, form.elements.email)
+    console.log('name', form.name, form.elements.name)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -266,7 +266,7 @@ function NoRefsForm() {
       </div>
       <button type="submit">Submit</button>
     </form>
-  );
+  )
 }
 ```
 
