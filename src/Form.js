@@ -1,32 +1,31 @@
-import React from "react";
-
-import { NoRefsForm } from "./NoRefs";
+import React from 'react'
+// import { NoRefsForm } from "./NoRefs";
 
 function Form() {
   const [values, setValues] = React.useState({
-    email: "",
-    name: "",
-    message: "",
-  });
+    email: '',
+    name: '',
+    message: '',
+  })
 
   const handleChange = (e) => {
-    console.log("  ", e.target.name);
+    console.log('  ', e.target.name)
     setValues((oldValues) => ({
       ...oldValues,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    console.log("name:", values.name);
-    console.log("email:", values.email);
-    console.log("message:", values.message);
+    event.preventDefault()
+    console.log('name:', values.name)
+    console.log('email:', values.email)
+    console.log('message:', values.message)
   }
 
   return (
     <>
-      <NoRefsForm />
+      {/* <NoRefsForm /> */}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
@@ -60,7 +59,7 @@ function Form() {
         <button type="submit">Submit</button>
       </form>
     </>
-  );
+  )
 }
 
-export default Form;
+export default Form
