@@ -1,23 +1,25 @@
 # React Forms Review
 
-```html
-function ContactForm() { return (
-<form>
-  <div>
-    <label htmlFor="name">Name</label>
-    <input id="name" type="text" />
-  </div>
-  <div>
-    <label htmlFor="email">Email</label>
-    <input id="email" type="email" />
-  </div>
-  <div>
-    <label htmlFor="message">Message</label>
-    <textarea id="message" />
-  </div>
-  <button type="submit">Submit</button>
-</form>
-); }
+```js
+function ContactForm() {
+  return (
+    <form>
+      <div>
+        <label htmlFor="name">Name</label>
+        <input id="name" type="text" />
+      </div>
+      <div>
+        <label htmlFor="email">Email</label>
+        <input id="email" type="email" />
+      </div>
+      <div>
+        <label htmlFor="message">Message</label>
+        <textarea id="message" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
 ```
 
 Each label has an htmlFor prop that matches the id on its corresponding input.
