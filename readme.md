@@ -27,25 +27,25 @@ Each label has an htmlFor prop that matches the id on its corresponding input.
 
 ## Controlled vs. Uncontrolled
 
-- uncontrolled input is the simpler of the two. It’s the closest to a plain HTML input. React puts it on the page, and the browser keeps track of the rest. When you need to access the input’s value, React provides a way to do that. Uncontrolled inputs require less code, but make it harder to do certain things.
+- uncontrolled input is simpler - the closest to a plain HTML input. React puts it on the page, and the browser keeps track of the rest. When you need to access the input’s value, React provides a way to do that. Uncontrolled inputs require less code, but make it harder to do certain things.
 
-- controlled input: YOU explicitly control the value that the input displays. You have to write code to respond to keypresses, store the current value somewhere, and pass that value back to the input to be displayed. It’s a feedback loop with your code in the middle. It’s more manual work to wire these up, but they offer the most control.
+- controlled input: you explicitly control the value that the input displays. You have to write code to respond to keypresses, store the current value somewhere, and pass that value back to the input to be displayed. It’s a feedback loop with your code in the middle. It’s more manual work to wire these up, but they offer the most control.
 
 ## Controlled
 
 Add 3 calls to useState to create 3 variables to hold the inputs’ values:
 
 ```js
-function ContactForm() {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [message, setMessage] = React.useState('');
+function App() {
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('name:', name);
-    console.log('email:', email);
-    console.log('message:', message);
+    console.log("name:", name);
+    console.log("email:", email);
+    console.log("message:", message);
   }
 
   return (
@@ -95,7 +95,7 @@ With every keypress, the component will re-render the whole form.
 - bind the refs to the inputs with the ref prop
 
 ```js
-function ContactForm() {
+function App() {
   const nameRef = React.useRef();
   const emailRef = React.useRef();
   const messageRef = React.useRef();
@@ -138,9 +138,9 @@ function ContactForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('name:', nameRef.current.value);
-    console.log('email:', emailRef.current.value);
-    console.log('message:', messageRef.current.value);
+    console.log("name:", nameRef.current.value);
+    console.log("email:", emailRef.current.value);
+    console.log("message:", messageRef.current.value);
   }
 
   return (
@@ -180,11 +180,11 @@ E.g.:
 
 ```js
 function EmailField() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
     // no exclamations allowed!
-    setEmail(e.target.value.replace(/!/g, ''));
+    setEmail(e.target.value.replace(/!/g, ""));
   };
 
   return (
@@ -196,13 +196,13 @@ function EmailField() {
 }
 ```
 
-Becasue controlled inputs are more complex we combine inputs into a single state object:
+Because controlled inputs are more complex, we often combine inputs into a single state object:
 
 ```js
 function MultipleInputs() {
   const [values, setValues] = useState({
-    email: '',
-    name: '',
+    email: "",
+    name: "",
   });
 
   const handleChange = (e) => {
@@ -237,10 +237,6 @@ function MultipleInputs() {
 }
 ```
 
-Adding overhead like this is why form libraries are popular.
-
-See [Formik](https://formik.org/docs/tutorial)
-
 As the number of inputs grows keypresses can start to feel perceptibly laggy - esp. on mobile devices.
 
 ## Uncontrolled Inputs Don’t Re-render
@@ -254,8 +250,8 @@ function NoRefsForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    console.log('email', form.email, form.elements.email);
-    console.log('name', form.name, form.elements.name);
+    console.log("email", form.email, form.elements.email);
+    console.log("name", form.name, form.elements.name);
   };
 
   return (
@@ -273,3 +269,63 @@ function NoRefsForm() {
   );
 }
 ```
+
+## Accessible Form Labels
+
+Every input should have a label. Label-less inputs make trouble for screenreaders, which makes trouble for humans.
+
+1. Label next to input (2 sibling elements)
+
+```js
+<label htmlFor="email">Email address</label>
+<input id="wat" name="email" />
+```
+
+Give the input an id and the label an htmlFor that matches, and put the elements side-by-side. Order doesn’t matter, as long as the identifiers match up.
+
+2. Input inside label
+
+```js
+<label>
+  Email Address
+  <input type="email" name="email" />
+</label>
+```
+
+If you wrap the input in a label, you don’t need the id and the htmlFor. You’ll want a way to refer to the input though, so give it an id or a name.
+
+## Reduce Form Boilerplate With Small Components
+
+Given many similar fields:
+
+```js
+<div>
+  <label htmlFor="email">Email Address</label>
+  <input name="email" id="email">
+</div>
+```
+
+You can create a single component:
+
+```js
+function Input({ name, label }) {
+  return (
+    <div>
+      <label htmlFor={name}>{label}</label>
+      <input name={name} id={name}>
+    </div>
+  );
+}
+```
+
+`<Input name="email" label="Email Address"/>`
+
+## Best Practices?
+
+The React [docs](https://reactjs.org/docs/uncontrolled-components.html) definitively recommend controlled components.
+
+## Alternatives
+
+React froms often get quite complex and this is why form libraries are popular.
+
+See [Formik](https://formik.org/docs/tutorial) and [React-hook-form](https://react-hook-form.com)
